@@ -37,6 +37,8 @@ func (o *Optional[T]) IsPresent() bool {
 	return o.value != nil || o.def != nil
 }
 
-func (o *Optional[T]) SetDefault(value T) {
+func (o *Optional[T]) SetDefault(value T) *Optional[T] {
 	o.def = &value
+
+	return o
 }
