@@ -27,15 +27,15 @@ func (s String) Raw() string {
 	return string(s)
 }
 
-func (s String) Split(sep String) []String {
+func (s String) Split(sep String) List[String] {
 	slice := strings.Split(s.Raw(), sep.Raw())
-	var resultSlice []String
+	var list List[String]
 
 	for _, value := range slice {
-		resultSlice = append(resultSlice, String(value))
+		list = list.Append(String(value))
 	}
 
-	return resultSlice
+	return list
 }
 
 func (s String) Concat(sep String, texts ...String) String {

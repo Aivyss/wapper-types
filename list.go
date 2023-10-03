@@ -7,8 +7,16 @@ import (
 type List[T any] []T
 type MappableList[T, V any] List[T]
 
+func (l *List[T]) Raw() []T {
+	return *l
+}
+
 func (l *List[T]) Append(t T) List[T] {
 	return append(*l, t)
+}
+
+func (l *List[T]) Set(idx Int, elem T) {
+	l.Raw()[idx.Raw()] = elem
 }
 
 func (l *List[T]) Get(i Int) T {
@@ -16,18 +24,16 @@ func (l *List[T]) Get(i Int) T {
 }
 
 func (l *List[T]) ForEach(consumer func(t T)) {
-	size := len(*l)
-
-	for i := 0; i < size; i++ {
-		consumer(l.Get(Int(i)))
+	for i := Int(0); i < l.Length(); i++ {
+		consumer(l.Get(i))
 	}
 }
 
 func (l *List[T]) Contains(elem T) Bool {
 	flag := Bool(false)
 
-	for i := 0; i < len(*l); i++ {
-		value := l.Get(Int(i))
+	for i := Int(0); i < l.Length(); i++ {
+		value := l.Get(i)
 		valueType := reflect.TypeOf(value)
 		elemType := reflect.TypeOf(elem)
 
@@ -38,6 +44,10 @@ func (l *List[T]) Contains(elem T) Bool {
 	}
 
 	return flag
+}
+
+func (l *List[T]) Length() Int {
+	return Int(len(*l))
 }
 
 func Mappable[T, V any](l List[T]) MappableList[T, V] {

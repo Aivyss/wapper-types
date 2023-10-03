@@ -13,6 +13,7 @@ func TestList(t *testing.T) {
 
 		assert.Equal(t, list, types.List[types.String]{"a", "b", "c", "d"})
 		assert.Equal(t, list.Get(3).Raw(), "d")
+		assert.Equal(t, list[3].Raw(), "d")
 	})
 
 	t.Run("ForEach", func(t *testing.T) {
@@ -45,5 +46,15 @@ func TestList(t *testing.T) {
 		assert.True(t, convertedList.Contains(1).Raw())
 		assert.True(t, convertedList.Contains(2).Raw())
 		assert.True(t, convertedList.Contains(3).Raw())
+	})
+
+	t.Run("Set", func(t *testing.T) {
+		list := types.List[types.String]{"1", "2", "3"}
+
+		list[1] = "4"
+		assert.Equal(t, "4", list[1].Raw())
+
+		list.Set(2, "5")
+		assert.Equal(t, "5", list[2].Raw())
 	})
 }

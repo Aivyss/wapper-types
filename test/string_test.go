@@ -16,17 +16,17 @@ func TestString(t *testing.T) {
 	})
 
 	t.Run("Bool", func(t *testing.T) {
-		ss := []types.String{
-			types.String("true"),
-			types.String("True"),
-			types.String("1"),
-			types.String("T"),
-			types.String("t"),
-			types.String("aa"),
-			types.String("false"),
+		ss := types.List[types.String]{
+			"true",
+			"True",
+			"1",
+			"T",
+			"t",
+			"aa",
+			"false",
 		}
 
-		expectedResults := []types.Bool{
+		expectedResults := types.List[types.Bool]{
 			true, true, true, true, true, false, false,
 		}
 
@@ -48,7 +48,7 @@ func TestString(t *testing.T) {
 		w := types.String(s)
 		ws := w.Split("-")
 
-		assert.Equal(t, len(ss), len(ws))
+		assert.Equal(t, len(ss), ws.Length().Raw())
 		for i := 0; i < len(ss); i++ {
 			assert.Equal(t, ss[i], ws[i].Raw())
 		}
