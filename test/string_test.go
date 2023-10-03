@@ -2,11 +2,11 @@ package test
 
 import (
 	"fmt"
+	"github.com/aivyss/wrapper-types"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 	"strings"
 	"testing"
-	wrapperTypes "wrapper-types"
 )
 
 func TestString(t *testing.T) {

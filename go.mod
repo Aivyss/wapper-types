@@ -1,4 +1,4 @@
-module wrapper-types
+module github.com/aivyss/wrapper-types
 
 go 1.20
 
