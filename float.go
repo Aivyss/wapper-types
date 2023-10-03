@@ -1,4 +1,4 @@
-package wrapperTypes
+package types
 
 import (
 	"fmt"

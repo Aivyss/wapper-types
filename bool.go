@@ -1,4 +1,4 @@
-package wrapperTypes
+package types
 
 import "fmt"
 
@@ -30,4 +30,16 @@ func (b Bool) Or(c Bool) Bool {
 
 func (b Bool) Not() Bool {
 	return !b
+}
+
+func (b Bool) If(runnable func()) {
+	if b {
+		runnable()
+	}
+}
+
+func (b Bool) IfNot(runnable func()) {
+	if b.Not() {
+		runnable()
+	}
 }

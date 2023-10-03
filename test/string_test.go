@@ -11,22 +11,22 @@ import (
 
 func TestString(t *testing.T) {
 	t.Run("Length", func(t *testing.T) {
-		s := wrapperTypes.String("test")
-		assert.Equal(t, s.Length(), wrapperTypes.Int(len(s.Raw())))
+		s := types.String("test")
+		assert.Equal(t, s.Length(), types.Int(len(s.Raw())))
 	})
 
 	t.Run("Bool", func(t *testing.T) {
-		ss := []wrapperTypes.String{
-			wrapperTypes.String("true"),
-			wrapperTypes.String("True"),
-			wrapperTypes.String("1"),
-			wrapperTypes.String("T"),
-			wrapperTypes.String("t"),
-			wrapperTypes.String("aa"),
-			wrapperTypes.String("false"),
+		ss := []types.String{
+			types.String("true"),
+			types.String("True"),
+			types.String("1"),
+			types.String("T"),
+			types.String("t"),
+			types.String("aa"),
+			types.String("false"),
 		}
 
-		expectedResults := []wrapperTypes.Bool{
+		expectedResults := []types.Bool{
 			true, true, true, true, true, false, false,
 		}
 
@@ -37,7 +37,7 @@ func TestString(t *testing.T) {
 
 	t.Run("Raw", func(t *testing.T) {
 		uid := uuid.New()
-		w := wrapperTypes.String(uid.String())
+		w := types.String(uid.String())
 
 		assert.Equal(t, uid.String(), w.Raw())
 	})
@@ -45,7 +45,7 @@ func TestString(t *testing.T) {
 	t.Run("Split", func(t *testing.T) {
 		s := "ab-fef-asdf-gawef-asdfasdf"
 		ss := strings.Split(s, "-")
-		w := wrapperTypes.String(s)
+		w := types.String(s)
 		ws := w.Split("-")
 
 		assert.Equal(t, len(ss), len(ws))
@@ -55,8 +55,8 @@ func TestString(t *testing.T) {
 	})
 
 	t.Run("Concat", func(t *testing.T) {
-		s := wrapperTypes.String("")
-		texts := []wrapperTypes.String{
+		s := types.String("")
+		texts := []types.String{
 			"a", "b", "c", "d", "e",
 		}
 
@@ -65,7 +65,7 @@ func TestString(t *testing.T) {
 	})
 
 	t.Run("ReplaceAll", func(t *testing.T) {
-		s := wrapperTypes.String("ab\tcd\nef\rgh")
+		s := types.String("ab\tcd\nef\rgh")
 		replaceAll := s.ReplaceAll("\t", " ").ReplaceAll("\n", " ").ReplaceAll("\r", " ")
 		assert.Equal(t, "ab cd ef gh", replaceAll.Raw())
 
@@ -78,7 +78,7 @@ func TestString(t *testing.T) {
 	})
 
 	t.Run("TrimSpace", func(t *testing.T) {
-		s := wrapperTypes.String("abcdef")
+		s := types.String("abcdef")
 		w := " " + s + "   "
 
 		assert.Equal(t, s, w.TrimSpace())
@@ -87,7 +87,7 @@ func TestString(t *testing.T) {
 	t.Run("ToInt", func(t *testing.T) {
 		t.Run("case: success", func(t *testing.T) {
 			num := 123
-			numStr := wrapperTypes.String(fmt.Sprintf("%d", num))
+			numStr := types.String(fmt.Sprintf("%d", num))
 
 			converted, err := numStr.ToInt()
 			doPanicIfNotNil(err)
@@ -96,7 +96,7 @@ func TestString(t *testing.T) {
 		})
 
 		t.Run("case: Fail", func(t *testing.T) {
-			numStr := wrapperTypes.String("not number")
+			numStr := types.String("not number")
 
 			_, err := numStr.ToInt()
 
@@ -105,8 +105,8 @@ func TestString(t *testing.T) {
 	})
 
 	t.Run("IsBlank", func(t *testing.T) {
-		s1 := wrapperTypes.String(" \r abcdef \r\n fjhgjhk \n fasef ")
-		s2 := wrapperTypes.String(" \r  \r\n  \n  ")
+		s1 := types.String(" \r abcdef \r\n fjhgjhk \n fasef ")
+		s2 := types.String(" \r  \r\n  \n  ")
 
 		assert.False(t, s1.IsBlank().Raw())
 		assert.True(t, s2.IsBlank().Raw())

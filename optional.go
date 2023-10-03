@@ -1,4 +1,4 @@
-package wrapperTypes
+package types
 
 type Optional[T any] struct {
 	value *T

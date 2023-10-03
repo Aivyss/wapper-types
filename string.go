@@ -1,4 +1,4 @@
-package wrapperTypes
+package types
 
 import (
 	"strconv"
@@ -85,4 +85,16 @@ func (s String) IsBlank() Bool {
 		ReplaceAll("\r", "").
 		ReplaceAll("\n", "").
 		Length() == 0
+}
+
+func (s String) AppendInt(num Int) String {
+	return s + num.ToStr()
+}
+
+func (s String) AppendF64(num Float64) String {
+	return s + num.ToStr()
+}
+
+func (s String) AppendF32(num Float32) String {
+	return s + num.ToStr()
 }

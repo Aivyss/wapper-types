@@ -1,4 +1,4 @@
-package wrapperTypes
+package types
 
 type Uint64 uint64
 

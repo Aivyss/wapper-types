@@ -1,4 +1,4 @@
-package wrapperTypes
+package types
 
 import (
 	"errors"
@@ -68,4 +68,8 @@ func (i *Int) ToFloat64() Float64 {
 
 func (i *Int) ToFloat32() Float32 {
 	return Float32(i.Raw())
+}
+
+func (i *Int) Append(s String) String {
+	return i.ToStr() + s
 }
