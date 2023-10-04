@@ -19,6 +19,12 @@ func (m *Map[K, V]) Get(key K) V {
 	return m.Raw()[key]
 }
 
+func (m *Map[K, V]) GetSafe(key K) (V, Bool) {
+	value, ok := m.Raw()[key]
+
+	return value, Bool(ok)
+}
+
 func (m *Map[K, V]) Keys() List[K] {
 	return Mappable[Entry[K, V], K](m.Entries()).Do(
 		func(entry Entry[K, V]) K {
