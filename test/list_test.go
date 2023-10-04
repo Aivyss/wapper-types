@@ -60,11 +60,12 @@ func TestList(t *testing.T) {
 
 	t.Run("Filter", func(t *testing.T) {
 		list := types.List[types.Int]{1, 2, 3, 4, 5, 6}
+		sets := types.List[types.Int]{2, 4, 6}
 
 		list.Filter(func(num types.Int) types.Bool {
 			return num%2 == 0
 		}).ForEach(func(num types.Int) {
-			assert.False(t, num%2 == 1)
+			assert.True(t, sets.Contains(num).Raw())
 		})
 	})
 }
