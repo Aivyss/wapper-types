@@ -29,6 +29,18 @@ func (l *List[T]) ForEach(consumer func(t T)) {
 	}
 }
 
+func (l *List[T]) Filter(predicate func(t T) Bool) *List[T] {
+	filtered := List[T]{}
+
+	l.ForEach(func(t T) {
+		if predicate(t) {
+			filtered = filtered.Append(t)
+		}
+	})
+
+	return &filtered
+}
+
 func (l *List[T]) Contains(elem T) Bool {
 	flag := Bool(false)
 

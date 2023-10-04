@@ -57,4 +57,14 @@ func TestList(t *testing.T) {
 		list.Set(2, "5")
 		assert.Equal(t, "5", list[2].Raw())
 	})
+
+	t.Run("Filter", func(t *testing.T) {
+		list := types.List[types.Int]{1, 2, 3, 4, 5, 6}
+
+		list.Filter(func(num types.Int) types.Bool {
+			return num%2 == 0
+		}).ForEach(func(num types.Int) {
+			assert.False(t, num%2 == 1)
+		})
+	})
 }
